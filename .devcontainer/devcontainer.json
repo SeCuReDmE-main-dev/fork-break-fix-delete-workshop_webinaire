@@ -40,7 +40,8 @@
       ],
       "settings": {
         "editor.formatOnSave": false,
-        "terminal.integrated.defaultProfile.linux": "bash"
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "workbench.secondarySideBar.defaultVisibility": "hidden"
       }
     }
   },
