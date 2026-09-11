@@ -1,7 +1,6 @@
-// Devcontainer config for the fork-break-fix-delete workshop.
-// Lives at .devcontainer/fork-break-fix-delete/devcontainer.json — this repo hosts
-// multiple workshops, so each one gets its own subfolder under .devcontainer/.
-// Attendees connect via the deep link in this workshop's README (skips the config picker).
+// Devcontainer config for the Fork, Break, Fix, Delete workshop.
+// Lives at the default path, so the Codespaces badge in the README needs no
+// devcontainer_path query string.
 {
   "name": "fork-break-fix-delete-workshop",
 
@@ -46,7 +45,7 @@
     }
   },
 
-  "postCreateCommand": "bash .devcontainer/fork-break-fix-delete/scripts/post-create.sh",
+  "postCreateCommand": "bash .devcontainer/scripts/post-create.sh",
 
   // No forwardPorts. Tiger Cloud is remote and nothing listens locally.
   // (Codex's OAuth callback on :1455 is sidestepped by `codex login --device-auth`.)

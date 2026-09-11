@@ -1,8 +1,8 @@
-# Agent instructions — fork-break-fix-delete workshop
+# Agent instructions — Fork, Break, Fix, Delete workshop
 
-Read by Claude Code, Codex, and GitHub Copilot CLI. Launch your agent from **this
-directory** (`cd fork-break-fix-delete`) so it picks up this file and the
-permission rules in `.claude/settings.json`.
+Read by Claude Code, Codex, and GitHub Copilot CLI. Launch your agent from the repo
+root and it picks up this file and the permission rules in `.claude/settings.json`
+automatically.
 
 ## Target service
 

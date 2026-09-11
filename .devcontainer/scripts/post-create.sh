@@ -7,9 +7,6 @@
 
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
-WORKSHOP_DIR="$REPO_ROOT/fork-break-fix-delete"
-
 echo "==> Installing jq"
 # No postgresql-client, and no database driver either. Every statement in this
 # workshop, including the data load, goes through `tiger db query`.
@@ -37,12 +34,12 @@ npm install -g --silent @anthropic-ai/claude-code @openai/codex @github/copilot
 cat <<'BANNER'
 
   ────────────────────────────────────────────────────────────────
-   fork-break-fix-delete — container ready
+   Fork, Break, Fix, Delete — container ready
 
    Installed: jq, tiger, claude, codex, copilot
 
    You still need to authenticate. Open
-       fork-break-fix-delete/README.md
+       README.md
    and work through "Before the workshop". Budget about 20 minutes.
 
    Short version:

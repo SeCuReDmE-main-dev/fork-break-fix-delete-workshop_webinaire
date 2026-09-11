@@ -40,19 +40,14 @@ entire workshop — you need two services and you get two.
 
 ### 2. Open the Codespace
 
-[**Open in GitHub Codespaces**](https://codespaces.new/timescale/tigerdata-devrel-workshops/tree/mattstratton/fork-break-fix-delete?devcontainer_path=.devcontainer/fork-break-fix-delete/devcontainer.json)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/timescale/fork-break-fix-delete-workshop)
 
 Give it a few minutes on first boot. It installs `jq`, the Tiger CLI, and three coding
 agent CLIs. When it's done you'll see a banner in the terminal.
 
-Then move into the workshop directory and stay there:
-
-```bash
-cd fork-break-fix-delete
-```
-
-Everything below assumes you're in that directory. Launching your agent from here is what
-makes it pick up `AGENTS.md` and `.claude/settings.json`.
+Every command below runs from the repo root, which is where the Codespace drops you. Your
+agent picks up `AGENTS.md` and the permission rules in `.claude/settings.json` from there
+automatically.
 
 ### 3. Log in to the Tiger CLI
 
@@ -222,7 +217,7 @@ Ten columns, all `text`. No keys, no indexes, no hypertable. It's meant to hurt.
 ### 8. Have your agent load the data
 
 This is the first thing you'll ask an agent to do. Start it (`claude`, `codex`, or
-`copilot`) from the `fork-break-fix-delete` directory and give it this:
+`copilot`) and give it this:
 
 > **Prompt 1 — ingest**
 >
