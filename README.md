@@ -35,7 +35,7 @@ follow along.
 
 ### 1. Get a Tiger Cloud account
 
-Sign up at [tigerdata.com](https://www.tigerdata.com/). The free tier is enough for this
+Sign up at [tigerdata.com](https://www.tigerdata.com/). The shared tier is enough for this
 entire workshop — you need two services and you get two.
 
 ### 2. Open the Codespace
@@ -137,7 +137,7 @@ the agent so it re-reads its config.
 tiger service create --name fbfd-original --cpu shared --memory shared
 ```
 
-`--cpu shared --memory shared` is the free tier. It takes about 20 seconds. Free services
+`--cpu shared --memory shared` is the shared tier. It takes about 20 seconds. This services
 live in `us-east-1` only, and they fork in about 30 seconds, which is the entire reason
 this workshop fits in an hour.
 
@@ -196,7 +196,7 @@ statements in `data/load/`, and `scripts/load-data.sh` pipes each one through
 `gunzip -c | tiger db query`. Nothing is ever unpacked to disk.
 
 It's chunked at 100,000 rows because `tiger db query` sends a file as one query string, and
-all million rows at once is ~146 MB of SQL that a free service answers with
+all million rows at once is ~146 MB of SQL that a shared service answers with
 `ERROR: out of memory`. INSERTs are slower than a `COPY` — about 80 seconds for the full
 million — which is why this is pre-work.
 
@@ -284,7 +284,7 @@ of the next.
 scripts/explain fbfd-original -f sql/2-baseline.sql
 ```
 
-Write all three timings down. On a free-tier service, measured on 1,000,000 rows:
+Write all three timings down. On a shared tier service, measured on 1,000,000 rows:
 
 | Query | What it asks | Baseline |
 |-------|--------------|----------|
@@ -322,11 +322,11 @@ Hold onto that — your agent is about to run into the same wall.
 time tiger service fork "$(scripts/sid fbfd-original)" --now --name fbfd-fork
 ```
 
-Watch the clock. **We measured 29.7 seconds** with all million rows in place. On the free
+Watch the clock. **We measured 29.7 seconds** with all million rows in place. On the shared
 tier this is copy-on-write — it isn't copying 156 MB anywhere, so the time barely depends
 on how much data you have.
 
-The fork inherits the parent's sizing, so it comes out on the free tier too. You don't need
+The fork inherits the parent's sizing, so it comes out on the shared tier too. You don't need
 to pass `--cpu`/`--memory`.
 
 You now have two independent databases with identical contents. `fbfd-fork` is expendable.
@@ -411,7 +411,7 @@ scripts/explain fbfd-fork -f sql/3-verify-fix.sql
 ```
 
 Q1, Q2 and Q3 are byte-for-byte the same queries you ran in step 1. Here's what we measured
-on a free-tier service, before and after:
+on a shared tier service, before and after:
 
 **Run it twice.** The first query against a brand-new fork reads from cold storage — we
 measured Q1 at 87 ms on the first run and 5 ms on the second. The second run is the honest
@@ -477,7 +477,7 @@ nothing about this workflow depends on the agent being careful.
    it — and `tiger db connect --read-only` gives you the same thing as an interactive
    session.
 
-   One caveat we hit while building this: a **fork of a free service currently refuses
+   One caveat we hit while building this: a **fork of a shared service currently refuses
    read-only connections outright** — `FATAL: cannot disable read-only mode`. Read-only
    works on the original, which is where you'd actually want it. It's also why the
    "what changed?" section of `sql/3-verify-fix.sql` asks in SQL rather than using
@@ -524,7 +524,7 @@ Re-run `tiger mcp install <client>` and restart the agent — most agents read t
 config only at startup.
 
 **The database went read-only mid-ingest**
-Free services have a storage cap and flip to read-only when they hit it. We did not hit it:
+Shared services have a storage cap and flip to read-only when they hit it. We did not hit it:
 the loaded table is 156 MB, the database sits at 167 MB, and it peaked around 216 MB during
 the type conversion — all fine. If you do hit it, check `tiger service list`, then either
 load a smaller slice of the CSV or move to a paid service.
@@ -545,7 +545,7 @@ VIEW ... WITH NO DATA`, a second to `CALL refresh_continuous_aggregate(...)`. Wo
 your agent up front — it's in `AGENTS.md`.
 
 **`tiger db schema` fails on the fork with `cannot disable read-only mode`**
-Known: a fork of a free service refuses read-only connections, and `tiger db schema` always
+Known: a fork of a shared service refuses read-only connections, and `tiger db schema` always
 connects read-only. Use it against `fbfd-original`, and use the SQL introspection queries at
 the bottom of `sql/3-verify-fix.sql` for the fork. Ordinary read-write queries against the
 fork are unaffected.
