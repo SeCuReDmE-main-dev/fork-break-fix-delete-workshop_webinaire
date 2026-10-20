@@ -200,7 +200,7 @@ all million rows at once is ~146 MB of SQL that a shared service answers with
 `ERROR: out of memory`. INSERTs are slower than a `COPY` — about 80 seconds for the full
 million — which is why this is pre-work.
 
-> **On a paid service?** It all works. Two differences: forking takes about 2.5 minutes
+> **On a paid (non-shared) service?** It all works. Two differences: forking takes about 2.5 minutes
 > instead of 30 seconds (restore-and-replay rather than copy-on-write), and the baseline
 > queries are only about half as slow, so the before/after is less dramatic. Use
 > `--last-snapshot` instead of `--now` to get most of the speed back — we measured that at
