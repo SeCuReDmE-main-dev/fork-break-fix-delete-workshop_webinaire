@@ -67,8 +67,8 @@ tiger service list
 
 ### 4. Authenticate your coding agent
 
-You bring your own. All three are already installed. Pick one — in order of how likely it
-is to just work:
+You bring your own. The CLI agents are pre-installed in the Codespace (or use Google
+Antigravity directly). Pick one — in order of how likely it is to just work:
 
 <details>
 <summary><b>GitHub Copilot CLI</b> — zero friction, recommended if you're unsure</summary>
@@ -122,17 +122,13 @@ spins up an OAuth callback on `localhost:1455` that the browser on your laptop c
 </details>
 
 <details>
-<summary><b>Google Antigravity</b> — high-performance agentic coding assistant</summary>
+<summary><b>Google Antigravity</b> — IDE, desktop app, or CLI (<code>agy</code>)</summary>
 
 ```bash
-# If using the Antigravity CLI (agy):
-agy auth login
-
-# Or supply your Gemini API key in the environment:
-export GEMINI_API_KEY="your-api-key"
+agy
 ```
 
-If you are using the **Google Antigravity IDE**, your session is pre-authenticated with your Google account. Tiger MCP configures seamlessly via `tiger mcp install antigravity`.
+If you are using the **Google Antigravity IDE** or desktop app on your machine (with `tiger` and `jq` installed), your session is already authenticated with your Google account — open the workshop folder as your workspace and it picks up `AGENTS.md` automatically. If using the Antigravity CLI (`agy`), simply launch `agy` and complete the interactive authentication on first run.
 </details>
 
 ### 5. Install Tiger MCP into your agent
@@ -231,7 +227,7 @@ Ten columns, all `text`. No keys, no indexes, no hypertable. It's meant to hurt.
 ### 8. Have your agent load the data
 
 This is the first thing you'll ask an agent to do. Start it (`claude`, `codex`, `copilot`, or
-`antigravity`) and give it this:
+`agy` / Antigravity) and give it this:
 
 > **Prompt 1 — ingest**
 >
