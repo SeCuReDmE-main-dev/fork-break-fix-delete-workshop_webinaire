@@ -15,7 +15,7 @@ you'll measure the result, prove the original never moved, and throw the fork aw
 
 ## What you'll learn
 
-- How to connect Tiger MCP to Claude Code, Codex, GitHub Copilot CLI, or any MCP-capable
+- How to connect Tiger MCP to Claude Code, Codex, GitHub Copilot CLI, Google Antigravity, or any MCP-capable
   coding agent
 - How to fork a Tiger Cloud service so agent-driven changes never touch the original
 - How to have an agent diagnose slow queries from `EXPLAIN` plans and built-in Tiger Data
@@ -121,10 +121,24 @@ spins up an OAuth callback on `localhost:1455` that the browser on your laptop c
 `codex login --api-key` is the fallback if you have an OpenAI API key.
 </details>
 
+<details>
+<summary><b>Google Antigravity</b> — high-performance agentic coding assistant</summary>
+
+```bash
+# If using the Antigravity CLI (agy):
+agy auth login
+
+# Or supply your Gemini API key in the environment:
+export GEMINI_API_KEY="your-api-key"
+```
+
+If you are using the **Google Antigravity IDE**, your session is pre-authenticated with your Google account. Tiger MCP configures seamlessly via `tiger mcp install antigravity`.
+</details>
+
 ### 5. Install Tiger MCP into your agent
 
 ```bash
-tiger mcp install claude-code    # or: codex | copilot
+tiger mcp install claude-code    # or: antigravity | codex | copilot
 ```
 
 Then start your agent and ask it something like *"list my Tiger Cloud services"*. If it
@@ -216,8 +230,8 @@ Ten columns, all `text`. No keys, no indexes, no hypertable. It's meant to hurt.
 
 ### 8. Have your agent load the data
 
-This is the first thing you'll ask an agent to do. Start it (`claude`, `codex`, or
-`copilot`) and give it this:
+This is the first thing you'll ask an agent to do. Start it (`claude`, `codex`, `copilot`, or
+`antigravity`) and give it this:
 
 > **Prompt 1 — ingest**
 >

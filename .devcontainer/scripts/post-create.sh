@@ -44,7 +44,7 @@ cat <<'BANNER'
 
    Short version:
        tiger auth login --headless
-       tiger mcp install claude-code     # or codex / copilot
+       tiger mcp install claude-code     # or antigravity / codex / copilot
        tiger service create --name fbfd-original --cpu shared --memory shared
   ────────────────────────────────────────────────────────────────
 
